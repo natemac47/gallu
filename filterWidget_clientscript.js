@@ -11,7 +11,6 @@ function($scope, $location, $timeout, $window, $document, $rootScope, spUtil, sp
         $scope.isActive = isActive;
         sessionStorage.setItem('isActive', isActive);
         
-        // Retain the previously selected category
         const savedCategory = JSON.parse(sessionStorage.getItem('savedCategory'));
         if (savedCategory) {
             $scope.selectedCategory = savedCategory;
@@ -32,9 +31,7 @@ function($scope, $location, $timeout, $window, $document, $rootScope, spUtil, sp
         var activeFilterParam = '^active=' + activeValue;
         var filter = $scope.selectedCategory ? ($scope.selectedCategory.query || baseFilter) : baseFilter;
 
-        // Remove any existing 'active=' conditions
         filter = filter.replace(/(\^)?active=(true|false)/g, '');
-        // Add the new 'active' condition
         filter += activeFilterParam;
 
         var encodedFilter = encodeURIComponent(filter);
