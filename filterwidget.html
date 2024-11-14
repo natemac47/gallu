@@ -1,0 +1,41 @@
+<div class="panel panel-{{::options.color}} category-widget no-border">
+  <div class="panel-heading d-flex justify-content-between align-items-center">
+    <h2 class="h4 panel-title">
+      {{::options.title}}
+    </h2>
+    <div class="btn-group" role="group" aria-label="Status Filter">
+      <button type="button" class="btn btn-default"
+              ng-class="{'active': isActive}"
+              ng-click="setActiveFilter(true)">
+        Open
+      </button>
+      <button type="button" class="btn btn-default"
+              ng-class="{'active': !isActive}"
+              ng-click="setActiveFilter(false)">
+        Closed
+      </button>
+    </div>
+  </div>
+  <ul class="list-group category-list" role="list" aria-label="{{::options.title}}">
+    <li role="listitem"
+        class="list-group-item text-overflow-ellipsis"
+        ng-include="'category-template.html'"
+        ng-repeat="category in data.list">
+    </li>
+  </ul>
+</div>
+
+<script type="text/ng-template" id="category-template.html">
+  <div ng-click="caseFilterSelected(category)"
+       sn-focus="category.selectedFilter == data.selectedFilter"
+       aria-current="{{category.selectedFilter == data.selectedFilter}}"
+       aria-selected="{{category.selectedFilter == data.selectedFilter}}"
+       ng-class="{true: 'text-active', false: ''}[category.selectedFilter == data.selectedFilter]"
+       tabindex="0" class="group-item-focus group-item-primary">
+    <span class="block text-overflow-ellipsis category"
+          id="{{::category.myListFilter}}">
+      {{::category.myListFilter}}
+      <span class="sr-only">${items}</span>
+    </span>
+  </div>
+</script>
